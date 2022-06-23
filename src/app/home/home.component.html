@@ -1,0 +1,27 @@
+<div class="container">
+  <hr />
+  <div class="d-flex justify-content-around flex-wrap">
+    <div
+      [ngClass]="getClass(index)"
+      class="mb-3"
+      style="padding: 20px; border-radius: 5px; width: 22%"
+      *ngFor="let product of products; let index = index"
+    >
+      <img
+        alt="name"
+        [src]="'http://xapi.ngminds.com/' + product.image"
+        width="100"
+        height="200"
+      />
+      <p>{{ product.name }}</p>
+      <p><i class="fa fa-inr"></i>{{ product.price }}</p>
+      <button
+        type="button"
+        class="btn btn-warning"
+        (click)="addToCart(product._id, product)"
+      >
+        Add to Cart
+      </button>
+    </div>
+  </div>
+</div>
