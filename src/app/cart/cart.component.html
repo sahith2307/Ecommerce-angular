@@ -1,0 +1,80 @@
+<div class="container">
+  <app-navbar [cartValue]="cart.length"></app-navbar>
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">MY CART ({{ cart.length }})</div>
+      <div class="panel-body">
+        <div class="row" *ngFor="let item of cart">
+          <div class="col-md-3">
+            <img
+              alt="name"
+              [src]="'http://xapi.ngminds.com/' + item.image"
+              width="100px"
+              height="200px"
+            />
+          </div>
+          <div class="col-md-3">
+            {{ item.name }} <br /><i class="fa fa-inr"></i>{{ item.price }}
+          </div>
+          <div class="col-md-3">
+            quantity
+            <br />
+            <button
+              type="button"
+              ng-click="decrement()"
+              class="qtyminus"
+              ng-disabled="qty<=0"
+            >
+              -
+            </button>
+            <input
+              type="number"
+              name="quantity"
+              class="input-width"
+              min="1"
+              size="5px"
+              [(ngModel)]="item.qty"
+              [valueAsNumber]="item.qty"
+              (ngModelChange)="changeQuantity(item._id, item.qty)"
+              placeholder="quantity"
+            />
+            <button
+              type="button"
+              (click)="changeQuantity(item._id, item.qty + 1)"
+            >
+              +
+            </button>
+          </div>
+          <div class="col-md-3">
+            <button
+              type="button"
+              class="btn btn-warning"
+              (click)="removeFormCart(item._id)"
+            >
+              remove
+            </button>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-md-9">
+            <label class="pull-right">Amount Payable </label>
+          </div>
+          <div class="col-md-3">{{ total }}</div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <button type="button" class="btn btn-success" routerLink="/home">
+          Continue Shopping
+        </button>
+        <button
+          type="button"
+          class="pull-right btn btn-danger"
+          routerLink="/placeOrder"
+        >
+          Place Order
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

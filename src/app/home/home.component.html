@@ -1,11 +1,27 @@
 <div class="container">
+  <app-navbar [cartValue]="cartNumber"></app-navbar>
   <hr />
+  <select title="order" name="order" id="order" (change)="setOrder($event)">
+    <option value="same">Relevance</option>
+    <option value="asc">Low-High</option>
+    <option value="dec">High-Low</option>
+  </select>
+  <select
+    title="numbers"
+    name="numbers"
+    id="numbers"
+    (change)="setPaginationNumber($event)"
+  >
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+  </select>
   <div class="d-flex justify-content-around flex-wrap">
     <div
       [ngClass]="getClass(index)"
       class="mb-3"
       style="padding: 20px; border-radius: 5px; width: 22%"
-      *ngFor="let product of products; let index = index"
+      *ngFor="let product of splicedProducts; let index = index"
     >
       <img
         alt="name"
@@ -23,5 +39,23 @@
         Add to Cart
       </button>
     </div>
+  </div>
+  <div class="paginate-container">
+    <button class="button-color" type="button" (click)="onClickPrev()">
+      <
+    </button>
+    <button
+      type="button"
+      *ngFor="let page of pagination"
+      [ngClass]="
+        page === number ? 'button-color' : 'button-color button-color-active'
+      "
+      (click)="onClickPage(page)"
+    >
+      {{ page }}
+    </button>
+    <button class="button-color" type="button" (click)="onClickNext()">
+      >
+    </button>
   </div>
 </div>

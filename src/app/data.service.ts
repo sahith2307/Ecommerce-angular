@@ -9,4 +9,7 @@ export class DataService {
   getData = () => {
     return this.http.get('http://xapi.ngminds.com/api/getAllProducts');
   };
+  postData = (body: any) => {
+    return this.http.post('http://xapi.ngminds.com/api/placeOrder', body);
+  };
 }
